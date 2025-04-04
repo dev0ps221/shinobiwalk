@@ -10,40 +10,58 @@
     </div>
     <script src='kaplay.js'></script>
     <script src='Character.js'></script>
+    <script src='Shinobi.js'></script>
     <script>
         
         
         k = kaplay();
 
-        ninjawalk = new Character(k,{
-            sprite_name: "ninjawalk",
-            sprite_path: "assets/Shinobi/walk.png",
+        ninja = new Shinobi(k,{
+            sprite_name: "ninja",
+            sprite_paths: ["assets/Shinobi/walk.png","assets/Shinobi/idle.png"],
             sliceX: 8, // how many sprites are in the X axis
             sliceY: 1, // how many sprites are in the Y axis
             anims: {
                 walk: { from: 0, to: 7, loop: true },
-            },
-            width: 10,
-            height: 10,
-            anchor: { x: 0.5, y: 0.5 }
-        })
-        ninja = new Character(k,{
-            sprite_name: "ninja",
-            sprite_path: "assets/Shinobi/idle.png",
-            sliceX: 6, // how many sprites are in the X axis
-            sliceY: 1, // how many sprites are in the Y axis
-            anims: {
                 stand: { from: 0, to: 5, loop: true },
             },
-            width: 10,
-            height: 10,
+            width: 50,
+            speed : 12,
+            height: 50,
             anchor: { x: 0.5, y: 0.5 }
-        });
-
+        })
+        ninja.setSpriteIndex(1)
+        ninja.switchSprite({current_sprite_index:1,sliceX:6})
         ninja.load(true)
         ninja.play("stand");
-        ninjawalk.load(true)
-        ninjawalk.play("walk");
+        onKeyPress((key)=>{
+            
+            if(key == "right")
+            {
+                ninja.walk();
+                ninja.moveRight();
+                ninja.stand();
+            }
+            if(key == "left")
+            {
+                ninja.walk();
+                ninja.moveLeft();
+                ninja.stand();
+            }
+            if(key == "up")
+            {
+                ninja.play("walk");
+                ninja.moveUp();
+                ninja.play("stand");
+            }
+            if(key == "down")
+            {
+                ninja.play("walk");
+                ninja.moveDown();  
+                ninja.play("stand"); 
+            }
+        })
+        on
     </script>
 </body>
 </html>

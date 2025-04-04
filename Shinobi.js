@@ -1,0 +1,4 @@
+class Shinobi extends Character
+{
+    
+}
